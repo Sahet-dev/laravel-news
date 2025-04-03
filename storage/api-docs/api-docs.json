@@ -1,0 +1,224 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "News API",
+        "description": "API for managing news categories and articles",
+        "contact": {
+            "email": "support@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/news-articles": {
+            "get": {
+                "tags": [
+                    "News Articles"
+                ],
+                "summary": "Get all news articles",
+                "operationId": "c9aaee6246a8efca31a99942fb9f967a",
+                "responses": {
+                    "200": {
+                        "description": "List of news articles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/NewsArticle"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "News Articles"
+                ],
+                "summary": "Create a new news article",
+                "operationId": "cbbcb562dd8761ec0be8b8e53d6ef59b",
+                "requestBody": {
+                    "description": "News article data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewsArticle"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "News article created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NewsArticle"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/news-articles/{id}": {
+            "get": {
+                "tags": [
+                    "News Articles"
+                ],
+                "summary": "Get a specific news article by ID",
+                "operationId": "d587955c7ae9528c26cac191f9aa5d3b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the news article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A specific news article",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NewsArticle"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "News Articles"
+                ],
+                "summary": "Update a news article",
+                "operationId": "bca834b213c5bebd6b4896bd1d7af7a3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the news article to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated news article data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewsArticle"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "News article updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NewsArticle"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "News Articles"
+                ],
+                "summary": "Delete a news article",
+                "operationId": "fd9fa5aaaacb29b1b8ba68c64bef67fa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the news article to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "News article deleted"
+                    },
+                    "404": {
+                        "description": "Article not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "NewsArticle": {
+                "title": "News Article",
+                "required": [
+                    "title",
+                    "content",
+                    "category_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier of the news article",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Title of the news article",
+                        "type": "string",
+                        "example": "Breaking News"
+                    },
+                    "content": {
+                        "description": "Content of the news article",
+                        "type": "string",
+                        "example": "Detailed news content here..."
+                    },
+                    "image_url": {
+                        "description": "URL to the article's image",
+                        "type": "string",
+                        "example": "http://example.com/image.jpg"
+                    },
+                    "published_at": {
+                        "description": "Publication date of the news article",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-02T12:00:00Z"
+                    },
+                    "category_id": {
+                        "description": "The ID of the associated news category",
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "News Articles",
+            "description": "Operations related to news articles"
+        }
+    ]
+}
