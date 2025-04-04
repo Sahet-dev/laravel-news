@@ -40,7 +40,7 @@ class NewsArticleController extends Controller
      */
     public function index()
     {
-        return response()->json($this->articleService->getAllArticles());
+        return response()->json($this->articleService->getLatestArticles());
     }
 
     /**

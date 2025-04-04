@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class NewsArticle extends Model
 {
@@ -14,7 +15,7 @@ class NewsArticle extends Model
     /**
      * Get the category that this article belongs to.
      */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(NewsCategory::class, 'category_id');
     }

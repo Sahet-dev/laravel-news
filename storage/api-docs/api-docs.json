@@ -9,7 +9,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/news-articles": {
+        "/api/articles": {
             "get": {
                 "tags": [
                     "News Articles"

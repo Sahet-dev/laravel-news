@@ -16,6 +16,11 @@ class NewsCategoryRepository
         return NewsCategory::findOrFail($id);
     }
 
+    public function findByName($name)
+    {
+        return NewsCategory::where('name', $name)->first();
+    }
+
     public function create($data)
     {
         return NewsCategory::create($data);
@@ -33,3 +38,4 @@ class NewsCategoryRepository
         return NewsCategory::destroy($id);
     }
 }
+

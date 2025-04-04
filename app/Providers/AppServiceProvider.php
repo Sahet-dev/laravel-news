@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Repositories\NewsArticleRepository;
 use App\Repositories\NewsCategoryRepository;
 use App\Services\NewsArticleService;
-use App\Services\NewsCategoryService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,8 +16,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(NewsCategoryRepository::class, fn() => new NewsCategoryRepository());
         $this->app->bind(NewsArticleRepository::class, fn() => new NewsArticleRepository());
-        $this->app->bind(NewsCategoryService::class, fn($app) => new NewsCategoryService($app->make(NewsCategoryRepository::class)));
-        $this->app->bind(NewsArticleService::class, fn($app) => new NewsArticleService($app->make(NewsArticleRepository::class)));
+        $this->app->singleton(NewsArticleService::class, function ($app) {
+            return new NewsArticleService(
+                $app->make(NewsArticleRepository::class),
+                $app->make(NewsCategoryRepository::class)
+            );
+        });
     }
 
     /**
